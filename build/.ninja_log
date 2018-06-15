@@ -1,7 +1,0 @@
-# ninja log v5
-0	205	1529088243	com.github.cassidyjames.untrusted@exe/src/Application.c	4979cc9b4cc1714d
-0	205	1529088243	com.github.cassidyjames.untrusted@exe/src/MainWindow.c	4979cc9b4cc1714d
-205	420	1529088244	com.github.cassidyjames.untrusted@exe/meson-generated_src_Application.c.o	8c760981921e5a6b
-205	431	1529088244	com.github.cassidyjames.untrusted@exe/meson-generated_src_MainWindow.c.o	5005b881ecbeb2fa
-431	497	1529088244	com.github.cassidyjames.untrusted	4f246e7d8dd94d87
-1	147	0	meson-install	9bdc81fe2003aad4
