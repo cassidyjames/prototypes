@@ -53,8 +53,8 @@ public class UntrustedDialog : Gtk.Dialog {
         var cancel_button = (Gtk.Button) add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
 
         var install_button = (Gtk.Button) add_button (_("Install"), Gtk.ResponseType.OK);
-        install_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
         install_button.sensitive = false;
+        install_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
         var agree_check = new Gtk.CheckButton.with_label (_("I understand"));
         agree_check.margin_bottom = 6;
@@ -63,14 +63,15 @@ public class UntrustedDialog : Gtk.Dialog {
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
-        grid.row_spacing = 6;
         grid.margin_start = grid.margin_end = 12;
-        grid.attach (image,           0, 0, 1, 2);
-        grid.attach (primary_label,   1, 0, 1, 1);
-        grid.attach (secondary_label, 1, 1, 1, 1);
-        grid.attach (agree_check,     1, 2, 1, 1);
-        grid.show_all ();
+        grid.row_spacing = 6;
 
+        grid.attach (image,           0, 0, 1, 2);
+        grid.attach (primary_label,   1, 0);
+        grid.attach (secondary_label, 1, 1);
+        grid.attach (agree_check,     1, 2);
+
+        grid.show_all ();
         get_content_area ().add (grid);
 
         var action_area = get_action_area ();
