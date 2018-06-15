@@ -19,21 +19,22 @@
 * Authored by: Cassidy James Blaede <c@ssidyjam.es>
 */
 
-public class MainWindow : Gtk.Dialog {
+public class UntrustedDialog : Gtk.Dialog {
 
-    public MainWindow () {
+    public UntrustedDialog () {
         Object (
             deletable: false,
-            icon_name: "dialog-warning",
+            icon_name: "security-low",
             resizable: false,
             skip_taskbar_hint: true,
             skip_pager_hint: true,
-            title: _("Install %s").printf ("Install Untrusted Software")
+            title: _("Install %s").printf ("Install Untrusted Software"),
+            window_position: Gtk.WindowPosition.CENTER
         );
     }
 
     construct {
-        var image = new Gtk.Image.from_icon_name ("dialog-warning", Gtk.IconSize.DIALOG);
+        var image = new Gtk.Image.from_icon_name ("security-low", Gtk.IconSize.DIALOG);
         image.valign = Gtk.Align.START;
 
         var primary_label = new Gtk.Label (_("Install Untrusted Software?"));
@@ -44,7 +45,7 @@ public class MainWindow : Gtk.Dialog {
         primary_label.get_style_context ().add_class ("primary");
 
         var secondary_label = new Gtk.Label (_("This software is provided solely by its developer and has not been reviewed for security, privacy, or system integration."));
-        secondary_label.max_width_chars = 50;
+        secondary_label.max_width_chars = 55;
         secondary_label.selectable = true;
         secondary_label.wrap = true;
         secondary_label.xalign = 0;
@@ -56,12 +57,13 @@ public class MainWindow : Gtk.Dialog {
         install_button.sensitive = false;
 
         var agree_check = new Gtk.CheckButton.with_label (_("I understand"));
-        agree_check.margin_bottom = 12;
+        agree_check.margin_bottom = 6;
         agree_check.margin_top = 12;
         agree_check.bind_property ("active", install_button, "sensitive");
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
+        grid.row_spacing = 6;
         grid.margin_start = grid.margin_end = 12;
         grid.attach (image,           0, 0, 1, 2);
         grid.attach (primary_label,   1, 0, 1, 1);
