@@ -21,12 +21,13 @@
 
 public class Untrusted : Gtk.Application {
     public Untrusted () {
-        Object (application_id: "com.github.cassidyjames.untrusted",
+        Object (application_id: "com.github.cassidyjames.agents",
         flags: ApplicationFlags.FLAGS_NONE);
     }
 
     protected override void activate () {
-        var window = new UntrustedDialog ();
+        // var window = new UntrustedDialog ();
+        var window = new IndicatorDialog ();
         window.show_all ();
         this.add_window (window);
 

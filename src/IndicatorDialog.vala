@@ -19,32 +19,32 @@
 * Authored by: Cassidy James Blaede <c@ssidyjam.es>
 */
 
-public class UntrustedDialog : Gtk.Dialog {
+public class IndicatorDialog : Gtk.Dialog {
 
-    public UntrustedDialog () {
+    public IndicatorDialog () {
         Object (
             deletable: false,
-            icon_name: "security-low",
+            icon_name: "preferences-desktop",
             resizable: false,
             skip_taskbar_hint: true,
             skip_pager_hint: true,
-            title: _("Install Untrusted Software"),
+            title: _("Add Indicator"),
             window_position: Gtk.WindowPosition.CENTER
         );
     }
 
     construct {
-        var image = new Gtk.Image.from_icon_name ("security-low", Gtk.IconSize.DIALOG);
+        var image = new Gtk.Image.from_icon_name ("preferences-desktop", Gtk.IconSize.DIALOG);
         image.valign = Gtk.Align.START;
 
-        var primary_label = new Gtk.Label (_("Install Untrusted Software?"));
+        var primary_label = new Gtk.Label (_("Add Indicator?"));
         primary_label.max_width_chars = 50;
         primary_label.selectable = true;
         primary_label.wrap = true;
         primary_label.xalign = 0;
         primary_label.get_style_context ().add_class ("primary");
 
-        var secondary_label = new Gtk.Label (_("This software is provided solely by its developer and has not been reviewed for security, privacy, or system integration."));
+        var secondary_label = new Gtk.Label (_("This indicator may appear in the Panel whether or not an associated app is running or open. To disable it later, you can visit System Settings."));
         secondary_label.max_width_chars = 55;
         secondary_label.selectable = true;
         secondary_label.wrap = true;
@@ -52,14 +52,8 @@ public class UntrustedDialog : Gtk.Dialog {
 
         var cancel_button = (Gtk.Button) add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
 
-        var install_button = (Gtk.Button) add_button (_("Install"), Gtk.ResponseType.OK);
-        install_button.sensitive = false;
-        install_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
-
-        var agree_check = new Gtk.CheckButton.with_label (_("I understand"));
-        agree_check.margin_bottom = 6;
-        agree_check.margin_top = 12;
-        agree_check.bind_property ("active", install_button, "sensitive");
+        var allow_button = (Gtk.Button) add_button (_("Allow"), Gtk.ResponseType.OK);
+        allow_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
@@ -69,7 +63,6 @@ public class UntrustedDialog : Gtk.Dialog {
         grid.attach (image,           0, 0, 1, 2);
         grid.attach (primary_label,   1, 0);
         grid.attach (secondary_label, 1, 1);
-        grid.attach (agree_check,     1, 2);
 
         grid.show_all ();
         get_content_area ().add (grid);
@@ -81,7 +74,7 @@ public class UntrustedDialog : Gtk.Dialog {
         set_keep_above (true);
 
         cancel_button.clicked.connect (() => destroy ());
-        install_button.clicked.connect (() => destroy ());
+        allow_button.clicked.connect (() => destroy ());
     }
 }
 
