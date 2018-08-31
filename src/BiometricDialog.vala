@@ -20,14 +20,10 @@
 */
 
 public class BiometricDialog : Gtk.Dialog {
-    private const string BIO_AUTH_ICON = "fingerprint-symbolic";
-    private const string BIO_AUTH_SUMMARY = _("Touch");
-    private const string BIO_AUTH_DETAIL = _("Touch the fingerprint reader");
-
     public BiometricDialog () {
         Object (
             deletable: false,
-            icon_name: "fingerprint-symbolic",
+            icon_name: "dialog-password",
             resizable: false,
             skip_taskbar_hint: true,
             skip_pager_hint: true,
@@ -37,7 +33,7 @@ public class BiometricDialog : Gtk.Dialog {
     }
 
     construct {
-        var image = new Gtk.Image.from_icon_name (BIO_AUTH_ICON, Gtk.IconSize.DIALOG);
+        var image = new Gtk.Image.from_icon_name ("dialog-password", Gtk.IconSize.DIALOG);
         image.valign = Gtk.Align.START;
 
         var overlay = new Gtk.Overlay ();
@@ -51,31 +47,84 @@ public class BiometricDialog : Gtk.Dialog {
             overlay.add_overlay (overlay_image);
         }
 
-        var primary_label = new Gtk.Label (_("%s to Install Nimbus").printf (BIO_AUTH_SUMMARY));
+        var primary_label = new Gtk.Label (_("Authentication Required"));
         primary_label.max_width_chars = 50;
         primary_label.selectable = true;
         primary_label.wrap = true;
         primary_label.xalign = 0;
         primary_label.get_style_context ().add_class ("primary");
 
-        var secondary_label = new Gtk.Label (_("Authentication is required to install apps. %s to authenticate, or use your password.").printf (BIO_AUTH_DETAIL));
+        var secondary_label = new Gtk.Label (_("You must authenticate to install apps. You can use:"));
         secondary_label.max_width_chars = 48;
         secondary_label.selectable = true;
         secondary_label.wrap = true;
         secondary_label.xalign = 0;
 
+        var fingerprint_icon = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.MENU);
+        fingerprint_icon.margin_start = 4;
+        fingerprint_icon.get_style_context ().add_class ("accent");
+
+        var fingerprint_label = new Gtk.Label (_("Fingerprint"));
+        fingerprint_label.hexpand = true;
+        fingerprint_label.xalign = 0;
+
+        var smart_key_icon = new Gtk.Image.from_icon_name ("drive-removable-media-symbolic", Gtk.IconSize.MENU);
+        smart_key_icon.margin_start = 4;
+        smart_key_icon.get_style_context ().add_class ("accent");
+
+        var smart_key_label = new Gtk.Label (_("Removable Key"));
+        smart_key_label.hexpand = true;
+        smart_key_label.xalign = 0;
+
+        var bluetooth_icon = new Gtk.Image.from_icon_name ("bluetooth-symbolic", Gtk.IconSize.MENU);
+        bluetooth_icon.margin_start = 4;
+        bluetooth_icon.get_style_context ().add_class ("accent");
+
+        var bluetooth_label = new Gtk.Label (_("Paired Device"));
+        bluetooth_label.hexpand = true;
+        bluetooth_label.xalign = 0;
+
+        var face_icon = new Gtk.Image.from_icon_name ("face-smile-symbolic", Gtk.IconSize.MENU);
+        face_icon.margin_start = 4;
+        face_icon.get_style_context ().add_class ("accent");
+
+        var face_label = new Gtk.Label (_("Facial Recognition"));
+        face_label.hexpand = true;
+        face_label.xalign = 0;
+
+        var password_entry = new Gtk.Entry ();
+        password_entry.placeholder_text = _("Password");
+        password_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
+
+        var methods_grid = new Gtk.Grid ();
+        methods_grid.column_spacing = 6;
+        methods_grid.margin_top = methods_grid.margin_bottom = 6;
+        methods_grid.row_spacing = 12;
+
+        methods_grid.attach (fingerprint_icon,  0, 0);
+        methods_grid.attach (fingerprint_label, 1, 0);
+        methods_grid.attach (smart_key_icon,    0, 1);
+        methods_grid.attach (smart_key_label,   1, 1);
+        methods_grid.attach (bluetooth_icon,    0, 2);
+        methods_grid.attach (bluetooth_label,   1, 2);
+        methods_grid.attach (face_icon,         0, 3);
+        methods_grid.attach (face_label,        1, 3);
+        methods_grid.attach (password_entry,    0, 4, 2);
+
         var cancel_button = (Gtk.Button) add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
 
-        var password_button = (Gtk.Button) add_button (_("Use Password"), Gtk.ResponseType.OK);
+        var authenticate_button = (Gtk.Button) add_button (_("Authenticate"), Gtk.ResponseType.OK);
+        authenticate_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
         grid.margin_start = grid.margin_end = 12;
         grid.row_spacing = 6;
 
-        grid.attach (overlay, 0, 0, 1, 2);
-        grid.attach (primary_label, 1, 0);
+        grid.attach (overlay,         0, 0, 1, 2);
+        grid.attach (primary_label,   1, 0);
         grid.attach (secondary_label, 1, 1);
+        grid.attach (methods_grid,    1, 2);
 
         grid.show_all ();
         get_content_area ().add (grid);
@@ -87,7 +136,7 @@ public class BiometricDialog : Gtk.Dialog {
         set_keep_above (true);
 
         cancel_button.clicked.connect (() => destroy ());
-        password_button.clicked.connect (() => destroy ());
+        authenticate_button.clicked.connect (() => destroy ());
     }
 }
 
