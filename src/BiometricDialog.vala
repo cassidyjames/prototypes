@@ -20,6 +20,26 @@
 */
 
 public class BiometricDialog : Gtk.Dialog {
+    private string CSS = """
+        /*
+        .fingerprint {
+            color: @STRAWBERRY_500;
+        }
+
+        .smart-key {
+            color: @GRAPE_700;
+        }
+
+        .bluetooth {
+            color: @BLUEBERRY_500;
+        }
+
+        .face {
+            color: @BANANA_900;
+        }
+        */
+    """;
+
     public BiometricDialog () {
         Object (
             deletable: false,
@@ -63,53 +83,80 @@ public class BiometricDialog : Gtk.Dialog {
         var fingerprint_icon = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.MENU);
         fingerprint_icon.margin_start = 4;
         fingerprint_icon.get_style_context ().add_class ("accent");
+        fingerprint_icon.get_style_context ().add_class ("fingerprint");
 
         var fingerprint_label = new Gtk.Label (_("Fingerprint"));
         fingerprint_label.hexpand = true;
         fingerprint_label.xalign = 0;
 
+        var fingerprint_success = new Gtk.Image.from_icon_name ("process-completed-symbolic", Gtk.IconSize.MENU);
+        fingerprint_success.visible = false;
+        fingerprint_success.no_show_all = true;
+
         var smart_key_icon = new Gtk.Image.from_icon_name ("drive-removable-media-symbolic", Gtk.IconSize.MENU);
         smart_key_icon.margin_start = 4;
         smart_key_icon.get_style_context ().add_class ("accent");
+        smart_key_icon.get_style_context ().add_class ("smart-key");
 
         var smart_key_label = new Gtk.Label (_("Removable Key"));
         smart_key_label.hexpand = true;
         smart_key_label.xalign = 0;
 
+        var smart_key_success = new Gtk.Image.from_icon_name ("process-completed-symbolic", Gtk.IconSize.MENU);
+        smart_key_success.visible = false;
+        smart_key_success.no_show_all = true;
+
         var bluetooth_icon = new Gtk.Image.from_icon_name ("bluetooth-symbolic", Gtk.IconSize.MENU);
         bluetooth_icon.margin_start = 4;
-        bluetooth_icon.get_style_context ().add_class ("accent");
+        // bluetooth_icon.get_style_context ().add_class ("accent");
+        bluetooth_icon.get_style_context ().add_class ("bluetooth");
+        bluetooth_icon.get_style_context ().add_class ("success");
 
         var bluetooth_label = new Gtk.Label (_("Paired Device"));
         bluetooth_label.hexpand = true;
         bluetooth_label.xalign = 0;
+        bluetooth_label.get_style_context ().add_class ("success");
+
+        var bluetooth_success = new Gtk.Image.from_icon_name ("process-completed-symbolic", Gtk.IconSize.MENU);
+        bluetooth_success.visible = false;
 
         var face_icon = new Gtk.Image.from_icon_name ("face-smile-symbolic", Gtk.IconSize.MENU);
         face_icon.margin_start = 4;
         face_icon.get_style_context ().add_class ("accent");
+        face_icon.get_style_context ().add_class ("face");
 
         var face_label = new Gtk.Label (_("Facial Recognition"));
         face_label.hexpand = true;
         face_label.xalign = 0;
 
+        var face_success = new Gtk.Image.from_icon_name ("process-completed-symbolic", Gtk.IconSize.MENU);
+        face_success.visible = false;
+        face_success.no_show_all = true;
+
         var password_entry = new Gtk.Entry ();
         password_entry.placeholder_text = _("Password");
         password_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
+        // password_entry.sensitive = false;
 
         var methods_grid = new Gtk.Grid ();
         methods_grid.column_spacing = 6;
         methods_grid.margin_top = methods_grid.margin_bottom = 6;
         methods_grid.row_spacing = 12;
+        methods_grid.row_spacing = 12;
 
-        methods_grid.attach (fingerprint_icon,  0, 0);
-        methods_grid.attach (fingerprint_label, 1, 0);
-        methods_grid.attach (smart_key_icon,    0, 1);
-        methods_grid.attach (smart_key_label,   1, 1);
-        methods_grid.attach (bluetooth_icon,    0, 2);
-        methods_grid.attach (bluetooth_label,   1, 2);
-        methods_grid.attach (face_icon,         0, 3);
-        methods_grid.attach (face_label,        1, 3);
-        methods_grid.attach (password_entry,    0, 4, 2);
+        methods_grid.attach (fingerprint_icon,    0, 0);
+        methods_grid.attach (fingerprint_label,   1, 0);
+        methods_grid.attach (fingerprint_success, 2, 0);
+        // methods_grid.attach (smart_key_icon,      0, 1);
+        // methods_grid.attach (smart_key_label,     1, 1);
+        // methods_grid.attach (smart_key_success,   2, 1);
+        methods_grid.attach (bluetooth_icon,      0, 2);
+        methods_grid.attach (bluetooth_label,     1, 2);
+        methods_grid.attach (bluetooth_success,   2, 2);
+        // methods_grid.attach (face_icon,           0, 3);
+        // methods_grid.attach (face_label,          1, 3);
+        // methods_grid.attach (face_success,        2, 3);
+        methods_grid.attach (password_entry,      0, 4, 3);
 
         var cancel_button = (Gtk.Button) add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
 
@@ -137,6 +184,14 @@ public class BiometricDialog : Gtk.Dialog {
 
         cancel_button.clicked.connect (() => destroy ());
         authenticate_button.clicked.connect (() => destroy ());
+
+        var provider = new Gtk.CssProvider ();
+        try {
+            provider.load_from_data (CSS, CSS.length);
+            Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        } catch (GLib.Error e) {
+            return;
+        }
     }
 }
 
