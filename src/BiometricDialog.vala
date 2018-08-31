@@ -80,7 +80,6 @@ public class BiometricDialog : Gtk.Dialog {
 
         var fingerprint_icon = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.MENU);
         fingerprint_icon.margin_start = 4;
-        // fingerprint_icon.get_style_context ().add_class ("accent");
         fingerprint_icon.get_style_context ().add_class ("fingerprint");
 
         var fingerprint_label = new Gtk.Label (_("Fingerprint"));
@@ -93,7 +92,6 @@ public class BiometricDialog : Gtk.Dialog {
 
         var smart_key_icon = new Gtk.Image.from_icon_name ("drive-removable-media-symbolic", Gtk.IconSize.MENU);
         smart_key_icon.margin_start = 4;
-        // smart_key_icon.get_style_context ().add_class ("accent");
         smart_key_icon.get_style_context ().add_class ("smart-key");
 
         var smart_key_label = new Gtk.Label (_("Removable Key"));
@@ -106,7 +104,6 @@ public class BiometricDialog : Gtk.Dialog {
 
         var bluetooth_icon = new Gtk.Image.from_icon_name ("preferences-bluetooth-symbolic", Gtk.IconSize.MENU);
         bluetooth_icon.margin_start = 4;
-        // bluetooth_icon.get_style_context ().add_class ("accent");
         bluetooth_icon.get_style_context ().add_class ("bluetooth");
 
         var bluetooth_label = new Gtk.Label (_("Paired Device"));
@@ -119,7 +116,6 @@ public class BiometricDialog : Gtk.Dialog {
 
         var face_icon = new Gtk.Image.from_icon_name ("face-smile-symbolic", Gtk.IconSize.MENU);
         face_icon.margin_start = 4;
-        // face_icon.get_style_context ().add_class ("accent");
         face_icon.get_style_context ().add_class ("face");
 
         var face_label = new Gtk.Label (_("Facial Recognition"));
@@ -133,7 +129,7 @@ public class BiometricDialog : Gtk.Dialog {
         var password_entry = new Gtk.Entry ();
         password_entry.placeholder_text = _("Password");
         password_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
-        // password_entry.sensitive = false;
+        password_entry.sensitive = false;
 
         var methods_grid = new Gtk.Grid ();
         methods_grid.column_spacing = 6;
