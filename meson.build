@@ -7,6 +7,7 @@ add_global_arguments ('-DGETTEXT_PACKAGE="' + meson.project_name () + '"', langu
 executable(
     meson.project_name (),
     'src/Application.vala',
+    'src/BiometricDialog.vala',
     'src/IndicatorDialog.vala',
     'src/UntrustedDialog.vala',
     dependencies: [
