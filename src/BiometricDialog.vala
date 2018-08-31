@@ -20,6 +20,9 @@
 */
 
 public class BiometricDialog : Gtk.Dialog {
+    private const string BIO_AUTH_ICON = "fingerprint-symbolic";
+    private const string BIO_AUTH_SUMMARY = _("Touch");
+    private const string BIO_AUTH_DETAIL = _("Touch the fingerprint reader");
 
     public BiometricDialog () {
         Object (
@@ -34,7 +37,7 @@ public class BiometricDialog : Gtk.Dialog {
     }
 
     construct {
-        var image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.DIALOG);
+        var image = new Gtk.Image.from_icon_name (BIO_AUTH_ICON, Gtk.IconSize.DIALOG);
         image.valign = Gtk.Align.START;
 
         var overlay = new Gtk.Overlay ();
@@ -48,14 +51,14 @@ public class BiometricDialog : Gtk.Dialog {
             overlay.add_overlay (overlay_image);
         }
 
-        var primary_label = new Gtk.Label (_("Touch to Install Nimbus"));
+        var primary_label = new Gtk.Label (_("%s to Install Nimbus").printf (BIO_AUTH_SUMMARY));
         primary_label.max_width_chars = 50;
         primary_label.selectable = true;
         primary_label.wrap = true;
         primary_label.xalign = 0;
         primary_label.get_style_context ().add_class ("primary");
 
-        var secondary_label = new Gtk.Label (_("Authentication is required to install apps. Touch the fingerprint reader to authenticate, or use your password."));
+        var secondary_label = new Gtk.Label (_("Authentication is required to install apps. %s to authenticate, or use your password.").printf (BIO_AUTH_DETAIL));
         secondary_label.max_width_chars = 48;
         secondary_label.selectable = true;
         secondary_label.wrap = true;
