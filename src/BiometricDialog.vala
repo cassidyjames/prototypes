@@ -106,7 +106,7 @@ public class BiometricDialog : Gtk.Dialog {
         smart_key_success.visible = false;
         smart_key_success.no_show_all = true;
 
-        var bluetooth_icon = new Gtk.Image.from_icon_name ("bluetooth-symbolic", Gtk.IconSize.MENU);
+        var bluetooth_icon = new Gtk.Image.from_icon_name ("preferences-bluetooth-symbolic", Gtk.IconSize.MENU);
         bluetooth_icon.margin_start = 4;
         // bluetooth_icon.get_style_context ().add_class ("accent");
         bluetooth_icon.get_style_context ().add_class ("bluetooth");
