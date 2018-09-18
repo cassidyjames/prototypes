@@ -28,7 +28,8 @@ public class Untrusted : Gtk.Application {
     protected override void activate () {
         // var window = new UntrustedDialog ();
         // var window = new IndicatorDialog ();
-        var window = new BiometricDialog ();
+        // var window = new BiometricDialog ();
+        var window = new ContentWarningDialog ("FooBar");
         window.show_all ();
         this.add_window (window);
 

@@ -8,6 +8,7 @@ executable(
     meson.project_name (),
     'src/Application.vala',
     'src/BiometricDialog.vala',
+    'src/ContentWarningDialog.vala',
     'src/IndicatorDialog.vala',
     'src/UntrustedDialog.vala',
     dependencies: [

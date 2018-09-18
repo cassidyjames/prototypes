@@ -135,7 +135,6 @@ public class BiometricDialog : Gtk.Dialog {
         methods_grid.column_spacing = 6;
         methods_grid.margin_top = methods_grid.margin_bottom = 6;
         methods_grid.row_spacing = 12;
-        methods_grid.row_spacing = 12;
 
         methods_grid.attach (fingerprint_icon,    0, 0);
         methods_grid.attach (fingerprint_label,   1, 0);
