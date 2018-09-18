@@ -13,6 +13,7 @@ executable(
     'src/UntrustedDialog.vala',
     dependencies: [
         dependency ('glib-2.0'),
+        dependency ('granite', version: '>=0.4.2'),
         dependency ('gtk+-3.0')
     ],
     install: true
