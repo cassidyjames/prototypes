@@ -22,21 +22,21 @@ public class ContentWarningDialog : Granite.MessageDialog {
         Object (
             app_name: _app_name,
             image_icon: new ThemedIcon ("dialog-warning"),
-            title: _("Content Warning")
+            title: "Content Warning"
         );
     }
 
     construct {
-        primary_text = _("%s Contains Explicit Content").printf (app_name);
-        secondary_text = _("%s may contain content only suitable for adults or that may be sensitive or disturbing. In general, elementary does not review or endorse the contents of this app.").printf (app_name);
+        primary_text = "%s Contains Explicit Content".printf (app_name);
+        secondary_text = "%s may contain content only suitable for adults or that may be sensitive or disturbing. In general, elementary does not review or endorse the contents of this app.".printf (app_name);
 
-        var check = new Gtk.CheckButton.with_label (_("Show content warnings"));
+        var check = new Gtk.CheckButton.with_label ("Show content warnings");
         check.active = true;
 
-        var cancel = add_button (_("Don’t Install"), Gtk.ResponseType.CANCEL) as Gtk.Button;
+        var cancel = add_button ("Don’t Install", Gtk.ResponseType.CANCEL) as Gtk.Button;
         cancel.clicked.connect (() => { destroy (); });
 
-        var install = add_button (_("Install Anyway"), Gtk.ResponseType.OK) as Gtk.Button;
+        var install = add_button ("Install Anyway", Gtk.ResponseType.OK) as Gtk.Button;
 
         custom_bin.add (check);
         set_default (install);

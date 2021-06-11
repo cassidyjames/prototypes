@@ -2,8 +2,6 @@ project('com.github.cassidyjames.agents', 'vala', 'c')
 
 gnome = import('gnome')
 
-add_global_arguments('-DGETTEXT_PACKAGE="' + meson.project_name() + '"', language:'c')
-
 executable(
     meson.project_name(),
     'src/Application.vala',
@@ -20,4 +18,3 @@ executable(
     ],
     install: true
 )
-

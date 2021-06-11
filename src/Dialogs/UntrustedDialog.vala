@@ -19,7 +19,7 @@
 * Authored by: Cassidy James Blaede <c@ssidyjam.es>
 */
 
-public class UntrustedDialog : Gtk.Dialog {
+public class UntrustedDialog : Granite.Dialog {
 
     public UntrustedDialog () {
         Object (
@@ -28,7 +28,7 @@ public class UntrustedDialog : Gtk.Dialog {
             resizable: false,
             skip_taskbar_hint: true,
             skip_pager_hint: true,
-            title: _("Install Untrusted Software"),
+            title: "Install Untrusted Software",
             window_position: Gtk.WindowPosition.CENTER
         );
     }
@@ -37,26 +37,26 @@ public class UntrustedDialog : Gtk.Dialog {
         var image = new Gtk.Image.from_icon_name ("security-low", Gtk.IconSize.DIALOG);
         image.valign = Gtk.Align.START;
 
-        var primary_label = new Gtk.Label (_("Install Untrusted Software?"));
+        var primary_label = new Gtk.Label ("Install Untrusted Software?");
         primary_label.max_width_chars = 50;
         primary_label.selectable = true;
         primary_label.wrap = true;
         primary_label.xalign = 0;
         primary_label.get_style_context ().add_class ("primary");
 
-        var secondary_label = new Gtk.Label (_("This software is provided solely by its developer and has not been reviewed for security, privacy, or system integration."));
+        var secondary_label = new Gtk.Label ("This software is provided solely by its developer and has not been reviewed for security, privacy, or system integration.");
         secondary_label.max_width_chars = 55;
         secondary_label.selectable = true;
         secondary_label.wrap = true;
         secondary_label.xalign = 0;
 
-        var cancel_button = (Gtk.Button) add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
+        var cancel_button = (Gtk.Button) add_button ("Cancel", Gtk.ResponseType.CANCEL);
 
-        var install_button = (Gtk.Button) add_button (_("Install"), Gtk.ResponseType.OK);
+        var install_button = (Gtk.Button) add_button ("Install", Gtk.ResponseType.OK);
         install_button.sensitive = false;
         install_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-        var agree_check = new Gtk.CheckButton.with_label (_("I understand"));
+        var agree_check = new Gtk.CheckButton.with_label ("I understand");
         agree_check.margin_bottom = 6;
         agree_check.margin_top = 12;
         agree_check.bind_property ("active", install_button, "sensitive");

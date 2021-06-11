@@ -53,7 +53,7 @@ public class BiometricDialog : Granite.MessageDialog {
         fingerprint_icon.margin_start = 4;
         fingerprint_icon.get_style_context ().add_class ("fingerprint");
 
-        var fingerprint_label = new Gtk.Label (_("Fingerprint"));
+        var fingerprint_label = new Gtk.Label ("Fingerprint");
         fingerprint_label.hexpand = true;
         fingerprint_label.xalign = 0;
 
@@ -65,7 +65,7 @@ public class BiometricDialog : Granite.MessageDialog {
         smart_key_icon.margin_start = 4;
         smart_key_icon.get_style_context ().add_class ("smart-key");
 
-        var smart_key_label = new Gtk.Label (_("Removable Key"));
+        var smart_key_label = new Gtk.Label ("Removable Key");
         smart_key_label.hexpand = true;
         smart_key_label.xalign = 0;
 
@@ -77,7 +77,7 @@ public class BiometricDialog : Granite.MessageDialog {
         bluetooth_icon.margin_start = 4;
         bluetooth_icon.get_style_context ().add_class ("bluetooth");
 
-        var bluetooth_label = new Gtk.Label (_("Paired Device"));
+        var bluetooth_label = new Gtk.Label ("Paired Device");
         bluetooth_label.hexpand = true;
         bluetooth_label.xalign = 0;
         bluetooth_label.get_style_context ().add_class ("success");
@@ -89,7 +89,7 @@ public class BiometricDialog : Granite.MessageDialog {
         face_icon.margin_start = 4;
         face_icon.get_style_context ().add_class ("face");
 
-        var face_label = new Gtk.Label (_("Facial Recognition"));
+        var face_label = new Gtk.Label ("Facial Recognition");
         face_label.hexpand = true;
         face_label.xalign = 0;
 
@@ -98,7 +98,7 @@ public class BiometricDialog : Granite.MessageDialog {
         face_success.no_show_all = true;
 
         var password_entry = new Gtk.Entry ();
-        password_entry.placeholder_text = _("Password");
+        password_entry.placeholder_text = "Password";
         password_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
         password_entry.sensitive = false;
 
