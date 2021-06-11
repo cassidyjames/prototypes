@@ -1,6 +1,6 @@
-# untrusted
+# Prototypes
 
-Experimental dialog for warning users of untrusted apps
+Experimental dialogs and other UI prototypes
 
 ![Screenshot](data/screenshot.png)
 
