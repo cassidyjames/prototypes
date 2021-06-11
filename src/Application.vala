@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2018 Cassidy James Blaede (https://cassidyjames.com)
+* Copyright 2018–2021 Cassidy James Blaede (https://cassidyjames.com)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -29,7 +29,10 @@ public class Untrusted : Gtk.Application {
         // var window = new UntrustedDialog ();
         // var window = new IndicatorDialog ();
         // var window = new BiometricDialog ();
-        var window = new ContentWarningDialog ("FooBar");
+        // var window = new ContentWarningDialog ("FooBar");
+
+        var window = new MainWindow (this);
+
         window.show_all ();
         this.add_window (window);
 
